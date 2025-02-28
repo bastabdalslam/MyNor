@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حكم من نور</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>حكم من نور</h1>
+        <button id="themeToggle"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <nav>
+        <ul>
+            <li onclick="showSection('home')"><i class="fas fa-home"></i> الأقسام</li>
+            <li onclick="showSection('new')"><i class="fas fa-plus"></i> الجديدة</li>
+            <li onclick="showSection('favorite')"><i class="fas fa-heart"></i> المفضلة</li>
+            <li onclick="showSection('settings')"><i class="fas fa-cog"></i> الإعدادات</li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home" class="content active">
+            <h2>الأقسام</h2>
+            <ul class="categories">
+                <li onclick="showSection('hikam')"><i class="fas fa-lightbulb"></i> حكم وأمثلة</li>
+                <li onclick="showSection('azkar')"><i class="fas fa-pray"></i> أدعية وأذكار</li>
+                <li onclick="showSection('quotes')"><i class="fas fa-pen"></i> عبارات وخواطر</li>
+                <li onclick="showSection('qisas')"><i class="fas fa-book-open"></i> قصص</li>
+                <li onclick="showSection('mawaez')"><i class="fas fa-heart"></i> مواعظ</li>
+            </ul>
+        </section>
+
+        <section id="new" class="content">
+            <h2>الإضافات الجديدة</h2>
+            <p>هنا تظهر أحدث الحكم والمواعظ المضافة.</p>
+        </section>
+
+        <section id="favorite" class="content">
+            <h2>المفضلة</h2>
+            <p>هنا تظهر العناصر التي أضافها المستخدم إلى المفضلة.</p>
+        </section>
+
+        <section id="settings" class="content">
+            <h2>الإعدادات</h2>
+            <ul class="settings-list">
+                <li><i class="fas fa-envelope"></i> تواصل معنا</li>
+                <li><i class="fas fa-star"></i> قيّم التطبيق</li>
+                <li><i class="fas fa-info-circle"></i> إصدار التطبيق: 1.0.0</li>
+                <li><i class="fas fa-share-alt"></i> شارك التطبيق مع أصدقائك</li>
+            </ul>
+        </section>
+
+        <section id="hikam" class="content">
+            <h2>حكم وأمثلة</h2>
+            <p>لا تنتظر اللحظة المثالية، خذ اللحظة التي لديك واجعلها مثالية.</p>
+            <p>كن واثقاً من نفسك، فالثقة هي نصف التفوق.</p>
+            <p>أنت لا تحتاج إلى رؤية السلم كله، فقط اخطو الخطوة الأولى.</p>
+            <p>لا تخف من التقدم ببطء، بل خف من البقاء في مكانك.</p>
+            <p>الأحلام لا تتحقق بالمعجزات، بل بالإرادة والعمل.</p>
+        </section>
+
+        <section id="azkar" class="content">
+            <h2>أدعية وأذكار</h2>
+            <p>اللهم اجعل هذا التطبيق صدقة جارية...</p>
+            <p><strong>"يارب إني تمنيت الكثير، وكُل الكثير بيدك."</strong></p>
+        </section>
+
+        <section id="quotes" class="content">
+            <h2>عبارات وخواطر</h2>
+            <p>الحياة مليئة بالدروس والعبر...</p>
+        </section>
+
+        <section id="qisas" class="content">
+            <h2>قصص</h2>
+            <p>قصة قصيرة عن الصبر...</p>
+        </section>
+
+        <section id="mawaez" class="content">
+            <h2>مواعظ</h2>
+            <p>لا تؤجل عمل اليوم إلى الغد...</p>
+        </section>
+    </main>
+
+</body>
+</html>
