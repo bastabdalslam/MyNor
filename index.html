@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=yes">
+    <title>حكم من نور</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>حكم من نور</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="ابحث هنا...">
+            <button onclick="searchContent()"><i class="fas fa-search"></i></button>
+        </div>
+        <button id="hamburger"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <nav>
+        <ul>
+            <li onclick="showSection('home')"><i class="fas fa-home"></i> الأقسام</li>
+            <li onclick="showSection('new')"><i class="fas fa-plus"></i> الجديدة</li>
+            <li onclick="showSection('favorite')"><i class="fas fa-heart"></i> المفضلة</li>
+            <li onclick="showSection('settings')"><i class="fas fa-cog"></i> الإعدادات</li>
+        </ul>
+    </nav>
+
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>القائمة</h3>
+            <button id="closeSidebar" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><i class="fas fa-info-circle"></i> إصدار التطبيق: 1.0.0</li>
+            <li onclick="notifications()"><i class="fas fa-bell"></i> الإشعارات</li>
+            <li onclick="checkUpdate()"><i class="fas fa-sync"></i> تحديث التطبيق</li>
+            <li onclick="showSection('decoration')"><i class="fas fa-paint-brush"></i> الزخرفة</li>
+            <li id="themeToggle"><i class="fas fa-moon"></i> تبديل الوضع الليلي</li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="home" class="content active">
+            <h2>الأقسام</h2>
+            <ul class="categories">
+                <li onclick="showSection('hikam')"><i class="fas fa-lightbulb"></i> حكم وأمثلة</li>
+                <li onclick="showSection('azkar')"><i class="fas fa-pray"></i> أدعية وأذكار</li>
+                <li onclick="showSection('quotes')"><i class="fas fa-pen"></i> عبارات وخواطر</li>
+                <li onclick="showSection('qisas')"><i class="fas fa-book-open"></i> قصص</li>
+                <li onclick="showSection('mawaez')"><i class="fas fa-heart"></i> مواعظ</li>
+                <li onclick="showSection('atab')"><i class="fas fa-sad-tear"></i> عتاب</li>
+                <li onclick="showSection('iqubasat')"><i class="fas fa-quote-right"></i> اقتباسات</li>
+                <li onclick="showSection('qissa-wa-ibra')"><i class="fas fa-book"></i> قصة وعبرة</li>
+                <li onclick="showSection('amthal-shaabiya')"><i class="fas fa-comment-dots"></i> أمثال شعبية</li>
+                <li onclick="showSection('huruf-dhahabiya')"><i class="fas fa-gem"></i> حروف ذهبية</li>
+                <li onclick="showSection('iitizar')"><i class="fas fa-handshake"></i> اعتذار</li>
+                <li onclick="showSection('rasail')"><i class="fas fa-envelope-open-text"></i> رسائل</li>
+                <li onclick="showSection('maqulat')"><i class="fas fa-quote-left"></i> مقولات</li>
+                <li onclick="showSection('kalima-tayyiba')"><i class="fas fa-seedling"></i> الكلمة الطيبة</li>
+            </ul>
+        </section>
+
+        <section id="new" class="content">
+            <h2>الإضافات الجديدة</h2>
+            <div class="item-container">
+                <p>- حكمة جديدة: "الصبر مفتاح الفرج."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>- دعاء جديد: "اللهم اغفر لي وارحمني."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="favorite" class="content">
+            <h2>المفضلة</h2>
+            <div id="favoritesList"></div>
+        </section>
+
+        <section id="settings" class="content">
+            <h2>الإعدادات</h2>
+            <ul class="settings-list">
+                <li onclick="contactUs()"><i class="fas fa-envelope"></i> تواصل معنا</li>
+                <li onclick="rateApp()"><i class="fas fa-star"></i> قيّم التطبيق</li>
+                <li onclick="shareApp()"><i class="fas fa-share-alt"></i> شارك التطبيق مع أصدقائك</li>
+                <li onclick="changeTheme('default')"><i class="fas fa-palette"></i> اللون الافتراضي (أزرق)</li>
+                <li onclick="changeTheme('green')"><i class="fas fa-palette"></i> اللون الأخضر الناعم</li>
+                <li onclick="changeTheme('purple')"><i class="fas fa-palette"></i> الأرجواني الداكن</li>
+                <li onclick="changeTheme('gray')"><i class="fas fa-palette"></i> الرمادي الفاتح</li>
+            </ul>
+        </section>
+
+        <section id="hikam" class="content">
+            <h2>حكم وأمثلة</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>لا تنتظر اللحظة المثالية، خذ اللحظة التي لديك واجعلها مثالية.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>كن واثقاً من نفسك، فالثقة هي نصف التفوق.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="azkar" class="content">
+            <h2>أدعية وأذكار</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>اللهم اجعل هذا التطبيق صدقة جارية...</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p><strong>"يارب إني تمنيت الكثير، وكُل الكثير بيدك."</strong></p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="quotes" class="content">
+            <h2>عبارات وخواطر</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>الحياة مليئة بالدروس والعبر...</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>كلما ازدادت ثقتك بنفسك، ازداد نجاحك.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="qisas" class="content">
+            <h2>قصص</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>قصة الصبر: كان هناك رجل صبور انتظر سنوات حتى تحقق حلمه...</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>قصة الصدق: طفل صغير أنقذ أسرته بصدقه وشجاعته...</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="mawaez" class="content">
+            <h2>مواعظ</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>تذكر دائماً أن الصبر يجلب الخير.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>الإحسان إلى الآخرين يعود بالخير عليك.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="atab" class="content">
+            <h2>عتاب</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>لماذا تغيب عني وأنا أنتظرك كل يوم؟</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>كيف تتركني وحدي في هذا الوادي العميق؟</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iqubasat" class="content">
+            <h2>اقتباسات</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>النجاح ليس المفتاح للسعادة، السعادة هي المفتاح للنجاح. - ألبرت أينشتاين</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>العقل يكون دائمًا عبداً للقلب. - ليوناردو دا فينشي</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="qissa-wa-ibra" class="content">
+            <h2>قصة وعبرة</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>قصة الفقير والملك: فقير ساعد ملكاً فأصبح غنياً بفضل أمانته.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>العصفور والنهر: عصفور صغير أنقذ قريته بذكائه.</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="amthal-shaabiya" class="content">
+            <h2>أمثال شعبية</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>"اللي ما يشوف من الغربال، أعمى."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>"الصبر طيب، وآخرته عجيب."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="huruf-dhahabiya" class="content">
+            <h2>حروف ذهبية</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>"العقل زينة الإنسان."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>"الصدق طريق النجاة."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="iitizar" class="content">
+            <h2>اعتذار</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>"أعتذر إن قصرت في حقك، فالقلب يحمل لك كل المودة."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>"سامحني، فالخطأ ليس مقصوداً والنية صافية."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="rasail" class="content">
+            <h2>رسائل</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>"إلى صديقي: وجودك في حياتي نعمة لا تقدر."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>"إلى أمي: أنتِ نور حياتي وسبب سعادتي."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="maqulat" class="content">
+            <h2>مقولات</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>"الحياة قصيرة، فلا تضيعها في الحقد." - عمر بن الخطاب</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>"العلم نور يضيء الطريق." - علي بن أبي طالب</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="kalima-tayyiba" class="content">
+            <h2>الكلمة الطيبة</h2>
+            <button class="back-button" onclick="showSection('home')"><i class="fas fa-arrow-left"></i> رجوع</button>
+            <div class="item-container">
+                <p>"ابتسم، فالابتسامة صدقة."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="item-container">
+                <p>"كلمة طيبة تفتح قلباً مغلقاً."</p>
+                <div class="item-actions">
+                    <button onclick="copyText(this.parentElement.previousElementSibling)"><i class="fas fa-copy"></i></button>
+                    <button onclick="shareText(this.parentElement.previousElementSibling)"><i class="fas fa-share"></i></button>
+                    <button onclick="whatsappShare(this.parentElement.previousElementSibling)"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="addToFavorites(this.parentElement.previousElementSibling)"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="decoration" class="content">
+            <h2>الزخرفة</h2>
+            <textarea id="decorationInput" placeholder="أدخل النص للزخرفة..."></textarea>
+            <button onclick="decorateText()">زخرف النص</button>
+            <div id="decoratedOutput"></div>
+            <button onclick="convertToImage()">تحويل إلى صورة</button>
+        </section>
+    </main>
+
+</body>
+</html>
